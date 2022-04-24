@@ -20,7 +20,13 @@ const MainBanner = () => {
             animated series to life. Buy a digital collectible, and help the
             show get made.
           </p>
-          <button>join our server</button>
+          <button 
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            window.open=('https://discord.gg/timewrecked',"_blank");
+            }}>
+              join our server</button>
         </div>
         <img src={main_banner_img} className="main_banner_img" alt="" />
       </div>

@@ -35,7 +35,7 @@ const About = () => {
           does what they have to do to survive.
         </p>
         <div className="button_wrapper">
-          <button onClick={() => {this.handleDownload('src/global/assets/Timewrecked.pdf', 'Timewrecked.pdf')
+          <button onClick={() => {handleDownload('http://localhost:3000/src/global/assets/Timewrecked.pdf', 'Timewrecked.pdf')
           }}>Download Pilot Script</button>
         </div>
       </div>
