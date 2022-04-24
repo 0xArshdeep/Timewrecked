@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap");
+@font-face {
+  font-family: "RifficFreeBold";
+  src: url("./global/RifficFree-Bold.ttf");
+}
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+nav,
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.common_width {
+  width: 1300px;
+  margin: 0rem auto;
+}
+@media screen and (max-width: 1350px) {
+  .common_width {
+    width: 95%;
+  }
+}
