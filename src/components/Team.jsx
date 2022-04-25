@@ -43,8 +43,9 @@ const Team = () => {
             <div className="presentation">
               <h1>Mark Risley</h1>
               <p>
-                Supervising director Emmy award winning director of Mr. Men,
-                Wild Thornberries, Rugrats, and Rocket Power
+                MARK RISLEY, director and executive producer, is a multiple Emmy-Award-winning director specializing in animated film 
+                and television. In his long and successful career he has produced and directed such hit shows as Rugrats, The Wild Thornberrys, 
+                As Told By Ginger, The Mr. Men Show, and the billion-dollar anime franchise Yokai Watch.
               </p>
             </div>
           </div>
