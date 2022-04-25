@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import { ethers } from 'ethers';
+import React, { useEffect, useState } from 'react';
+import { abi, chainId, contractAddress } from '../config';
+import { metaMask, hooks } from '../connectors/metaMask';
 
 const TierBox = ({
   img,
@@ -15,6 +18,37 @@ const TierBox = ({
   mint,
   isDisabled,
 }) => {
+  const [t1TotalSupply, setT1TotalSupply] = useState(0);
+  const [t2TotalSupply, setT2TotalSupply] = useState(0);
+  const [t3TotalSupply, setT3TotalSupply] = useState(0);
+  const {
+    useChainId,
+    useAccounts,
+    useError,
+    useIsActivating,
+    useIsActive,
+    useProvider,
+    useENSNames,
+  } = hooks;
+  const accounts = useAccounts();
+  const isActive = useIsActive();
+  const provider = useProvider();
+  const connectedChainId = useChainId();
+
+  const account = accounts && accounts[0];
+  const isCorrectChain = connectedChainId === chainId;
+
+  useEffect(() => {
+    void metaMask.connectEagerly();
+  }, []);
+  // metaMask;
+
+  const getContract = () => {
+    const signer = provider?.getSigner();
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    return contract;
+  };
+
   const [count, setCount] = useState(1);
 
   const totalPrice = (count * 10 * price * 10) / 100;
@@ -49,9 +83,15 @@ const TierBox = ({
 
           <div className='right_side'>
             <img src={img} alt='' />
-            <p className='minted'>
+            {isActive ? (
+              <p className='minted'>
               {totalSupply}/{maxSupply} Minted
-            </p>
+              </p>   
+              
+            ) : (
+              <p></p>       
+            )}
+            
             <div className='calc_arae'>
               <p
                 onClick={(e) =>

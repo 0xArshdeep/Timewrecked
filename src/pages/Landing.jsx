@@ -36,7 +36,7 @@ const Landing = () => {
       <RoadMap />
       <Tiers />
       <Funded />
-      <LeatherBoard />
+      
       <WhatIsThis />
       <About />
       <Team />

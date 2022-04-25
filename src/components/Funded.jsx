@@ -6,6 +6,9 @@ import { metaMask, hooks } from '../connectors/metaMask';
 const Funded = () => {
   const [userBalance, setUserBalance] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
+  const [t1TotalSupply, setT1TotalSupply] = useState(0);
+  const [t2TotalSupply, setT2TotalSupply] = useState(0);
+  const [t3TotalSupply, setT3TotalSupply] = useState(0);
   const [maxSupply, setMaxSupply] = useState(0);
   const {
     useChainId,
@@ -43,10 +46,19 @@ const Funded = () => {
       const contract = getContract();
 
       const ts = await contract['totalSupply()']();
+      const t1 = await contract["totalSupply(uint256)"](1);
+      const t2 = await contract["totalSupply(uint256)"](2);
+      const t3 = await contract["totalSupply(uint256)"](3);
       const ms = await contract.maxSupply();
 
       const tsNumber = ts.toNumber();
       const msNumber = ms.toNumber();
+      const t1Number = t1.toNumber();
+      const t2Number = t2.toNumber();
+      const t3Number = t3.toNumber();
+      setT1TotalSupply(t1Number);
+      setT2TotalSupply(t2Number);
+      setT3TotalSupply(t3Number);
 
       setTotalSupply(tsNumber);
       setMaxSupply(msNumber);
@@ -70,7 +82,14 @@ const Funded = () => {
     void metaMask.connectEagerly();
   }, []);
 
-  const percentage = (totalSupply / maxSupply) * 100;
+  useEffect(() => {
+    if (!isActive) {
+      metaMask.activate(chainId);
+    }
+  }, []);
+
+  const ethGenerated = (t1TotalSupply * 10) + (t2TotalSupply * 1.5) + (t3TotalSupply * 0.1);
+  const percentage = (((t1TotalSupply * 10) + (t2TotalSupply * 1.5) + (t3TotalSupply * 0.1)) / 120) * 100;
 
   return (
     <div className='Funded' id="connect">
@@ -86,9 +105,15 @@ const Funded = () => {
               }}
             ></span>
           </div>
-          <p>
-            {totalSupply}/{maxSupply}
-          </p>
+          {isActive ? (
+              <p>
+              {ethGenerated}/120
+            </p> 
+              
+            ) : (
+              <p></p>       
+            )}
+          
         </div>
         {isActive ? (
           <>

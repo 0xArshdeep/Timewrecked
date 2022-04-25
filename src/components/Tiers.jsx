@@ -13,18 +13,14 @@ const Tiers = () => {
   const {
     useChainId,
     useAccounts,
-    useError,
-    useIsActivating,
     useIsActive,
     useProvider,
-    useENSNames,
   } = hooks;
   const accounts = useAccounts();
   const isActive = useIsActive();
   const provider = useProvider();
   const connectedChainId = useChainId();
-
-  const account = accounts && accounts[0];
+  
   const isCorrectChain = connectedChainId === chainId;
 
   useEffect(() => {
@@ -64,7 +60,7 @@ const Tiers = () => {
         const contract = getContract();
         const payableETHValue = count * tierCosts[tier - 1];
         console.log({ payableETHValue });
-        const res = await contract.mintAllowList(count, tier, {
+        const res = await contract.mint(count, tier, {
           value: ethers.utils.parseEther(payableETHValue.toString()),
         });
 
