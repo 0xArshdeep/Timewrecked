@@ -4,7 +4,6 @@ import second_cloud from "../global/assets/second_cloud.png";
 import castle_second_big from "../global/assets/castle_second_big.png";
 import second_small_castle from "../global/assets/second_small_castle.png";
 import ReactPlayer from "react-player";
-import animaticVid from "../global/assets/animatic.mov";
 
 import {useState } from "react";
 
