@@ -64,7 +64,7 @@ const Tiers = () => {
         const contract = getContract();
         const payableETHValue = count * tierCosts[tier - 1];
         console.log({ payableETHValue });
-        const res = await contract.mint(count, tier, {
+        const res = await contract.mintAllowList(count, tier, {
           value: ethers.utils.parseEther(payableETHValue.toString()),
         });
 
@@ -141,7 +141,7 @@ const Tiers = () => {
           list={tiersData[0].list}
           tierpara={tiersData[0].tierpara}
           totalSupply={t1TotalSupply}
-          maxSupply={6}
+          maxSupply={5}
           price={tierCosts[0]}
           mint={(c) => {
             mint(c, 1);

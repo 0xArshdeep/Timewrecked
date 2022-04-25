@@ -11,10 +11,7 @@ const Header = () => {
             <a href="">Home</a>
           </li>
           <li>
-            <a href="#mint">Mint</a>
-          </li>
-          <li>
-            <a href="#leaderboard">Leaderboard</a>
+            <a href="#connect">Mint</a>
           </li>
           <li>
             <a href="#about">About</a>
@@ -26,13 +23,16 @@ const Header = () => {
             <a href="#visual">Visual Overview</a>
           </li>
           <li>
-            <a href="#characters">Characters</a>
-          </li>
-          <li>
             <a href="#episodes">Episodes</a>
           </li>
           <li>
-            <a href="#collectibles">Why Collectibles?</a>
+            <a href="https://hollywooddao.notion.site/hDAO-White-Paper-v2-63a386ec28364c9485446fb27826c8c0" target="_blank">Whitepaper</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/timewreckednft" target="_blank">Twitter</a>
+          </li>
+          <li>
+            <a href="https://opensea.io/collection/timewrecked" target="_blank">Opensea</a>
           </li>
         </nav>
         <div className="burger_icon" onClick={(e) => setActive(!Active)}>

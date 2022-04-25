@@ -33,7 +33,7 @@ const MainBanner = () => {
             }}>
               join our server</button>
 
-              <a href="#mint">
+              <a href="#connect">
             <button>mint</button>
           </a>
         </div>

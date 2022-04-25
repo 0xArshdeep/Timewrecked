@@ -73,7 +73,7 @@ const Funded = () => {
   const percentage = (totalSupply / maxSupply) * 100;
 
   return (
-    <div className='Funded'>
+    <div className='Funded' id="connect">
       <div className='content_area  common_width'>
         {percentage ? <h1>{percentage?.toFixed(2)}% Funded</h1> : <h1></h1>}
 

@@ -100,20 +100,39 @@
 }
 
 .VideoArea .video_wrapper {
-  height: 628px;
   border-radius: 30px;
   background-image: url(../assets/video_poster.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   position: relative;
+  height: 588px;
+}
+.VideoArea .video_wrapper .poster_img {
+  width: 100%;
+  height: 100%;
+}
+.VideoArea .video_wrapper video {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+  display: none;
+  border-radius: 20px;
+}
+.VideoArea .video_wrapper video.active {
+  display: block;
 }
 .VideoArea .video_wrapper .play_button {
   position: absolute;
   top: 50%;
+  /* display: none; */
+  transition: 0.3s ease all;
+  cursor: pointer;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.VideoArea .video_wrapper .play_button.active {
+  opacity: 0;
+}
 .VideoArea .second_cloud {
   position: absolute;
   top: 50px;

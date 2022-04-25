@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import play_button from "../global/assets/play_button.png";
 import second_cloud from "../global/assets/second_cloud.png";
 import castle_second_big from "../global/assets/castle_second_big.png";
 import second_small_castle from "../global/assets/second_small_castle.png";
-import ReactPlayer from "react-player";
-
-import {useState } from "react";
-
+import video from "../videos/animatic.mp4";
+import poster from "../global/assets/video.png";
 const VideoArea = () => {
-  const [playing, setPlaying] = useState(false);
-
+  const [videoState, setVideo] = useState(false);
   return (
     <div className="VideoArea">
       <img src={second_cloud} className="second_cloud" alt="" />
@@ -17,24 +14,26 @@ const VideoArea = () => {
       <img src={second_small_castle} className="second_small_castle" alt="" />
       <div className="content_area common_width">
         <div className="video_wrapper">
-          <ReactPlayer
-              url="../global/assets/animatic.mov"
-              light="../global/assets/video.png"
-              onClickPreview={() => setPlaying(true)}
-              playing={playing}
-              onPause={() => {
-                setPlaying(false);
-              }}
-              controls
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-              }}
-              width="100%"
-              height="100%"
-            />
-          </div>
+          <video
+            src={video}
+            controls
+            className={videoState && "active"}
+            onEnded={(e) => {
+              setVideo(false);
+            }}
+          />
+          {!videoState && <img src={poster} className="poster_img" />}
+
+          <img
+            src={play_button}
+            className={`play_button ${videoState && "active"}`}
+            alt=""
+            onClick={(e) => {
+              setVideo(true);
+              document.querySelector("video").play();
+            }}
+          />
+        </div>
         <p>
           When a modern family gets stuck in the time of Henry VIII, they do
           whatever it takes to survive, including trading their knowledge of the

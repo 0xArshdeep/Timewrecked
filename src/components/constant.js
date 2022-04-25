@@ -151,7 +151,7 @@ export const tiersData = [
     tierpara: "EXECUTIVE PRODUCER",
     mainHeading: "EXECUTIVE PRODUCER",
     etheading: "10 eth",
-    et10: "5/1112 - HAND DRAWN CHARACTERS",
+    et10: "5/1111 - HAND DRAWN CHARACTERS",
     voting:
       "AS AN EXECUTIVE PRODUCER YOU HAVE SECURED 100 VOTES FOR EACH ULTRA RARE NFT THAT YOU OWN.",
 
@@ -169,7 +169,7 @@ export const tiersData = [
     tierpara: "CREATIVE CONSULTANT",
     mainHeading: "CREATIVE CONSULTANT",
     etheading: "1.5 eth",
-    et10: "25/1112 - Hand Drawn characters",
+    et10: "25/1111 - Hand Drawn characters",
     voting:
       "as a creative consultant you have secured 20 votes for each super rare nft that you own.",
 
@@ -185,7 +185,7 @@ export const tiersData = [
     tierpara: "COMMUNITY",
     mainHeading: "COMMUNITY",
     etheading: "0.1 eth",
-    et10: "1081/1112 - hand drawn characters",
+    et10: "1081/1111 - hand drawn characters",
     voting:
       "as a community member you have secured 1 vote for each nft that you own.",
 
