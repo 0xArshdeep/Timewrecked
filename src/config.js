@@ -1,5 +1,5 @@
-export const contractAddress = '0x4C1fFc49F5BB23305FA97473CdAd7daB4e8D74cb';
-export const chainId = 4;
+export const contractAddress = '';
+export const chainId = 1;
 export const tierCosts = [10, 1.5, 0.1];
 export const abi = [
   { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
