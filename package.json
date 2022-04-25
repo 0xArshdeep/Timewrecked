@@ -11,8 +11,6 @@
     "axios": "^0.26.1",
     "ethers": "^5.6.4",
     "js-file-download": "^0.4.12",
-    "node": "^16.13.1",
-    "node.js": "^0.0.1-security",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-player": "^2.10.0",
