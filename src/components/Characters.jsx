@@ -2,7 +2,7 @@ import React from "react";
 import first_char from "../global/assets/first_char.png";
 const Characters = () => {
   return (
-    <div className="Characters">
+    <div className="Characters" id="characters">
       <div className="content_area common_width">
         <h1>Characters</h1>
 

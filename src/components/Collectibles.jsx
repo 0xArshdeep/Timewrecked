@@ -5,7 +5,7 @@ import card3 from "../global/assets/collect_3.png";
 import collectable from "../global/assets/collectable.png";
 const Collectibles = () => {
   return (
-    <div className="Collectibles">
+    <div className="Collectibles" id="collectibles">
       <img src={collectable} alt="" />
       <div className="content_area common_width">
         <h1>Why Collectibles?</h1>

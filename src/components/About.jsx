@@ -1,21 +1,9 @@
 import React from "react";
 import about_wave from "../global/assets/about_wave.png";
-import axios from 'axios'
-import fileDownload from 'js-file-download'
 
 const About = () => {
-
-  const handleDownload = (url, filename) => {
-    axios.get(url, {
-      responseType: 'blob',
-    })
-    .then((res) => {
-      fileDownload(res.data, filename)
-    })
-  }
-
   return (
-    <div className="About">
+    <div className="About" id="about">
       <img src={about_wave} alt="" />
       <div className="content_area common_width">
         <h1>About</h1>
@@ -35,8 +23,9 @@ const About = () => {
           does what they have to do to survive.
         </p>
         <div className="button_wrapper">
-          <button onClick={() => {handleDownload('http://localhost:3000/src/global/assets/Timewrecked.pdf', 'Timewrecked.pdf')
-          }}>Download Pilot Script</button>
+          <a href={require("../global/assets/Timewrecked.pdf")} download="Timewrecked">
+            <button>Download Pilot Script</button>
+          </a>
         </div>
       </div>
     </div>

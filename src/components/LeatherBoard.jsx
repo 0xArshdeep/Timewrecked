@@ -76,7 +76,7 @@ const LeatherBoard = () => {
   const percentage = (totalSupply / maxSupply) * 100;
 
   return (
-    <div className='Funded Leaderboard'>
+    <div className='Funded Leaderboard' id="leaderboard">
       <img src={img} alt='' />
       <div className='content_area  common_width'>
         <h1>Leaderboard</h1>
@@ -127,54 +127,7 @@ const LeatherBoard = () => {
                 <th>Contribution</th>
               </thead>
               <tbody>
-                <tr>
-                  <td>01</td>
-                  <td>
-                    <img
-                      src='https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-                      alt=''
-                    />
-                    Derek Smith
-                  </td>
-                  <td>$140,000</td>
-                  <td>140.00 ETH</td>
-                </tr>
-                <tr>
-                  <td>02</td>
-                  <td>
-                    <img
-                      src='https://images.unsplash.com/photo-1496302662116-35cc4f36df92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                      alt=''
-                    />
-                    Meg Klock
-                  </td>
-                  <td>$140,000</td>
-                  <td>140.00 ETH</td>
-                </tr>
-                <tr>
-                  <td>03</td>
-                  <td>
-                    <img
-                      src='https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-                      alt=''
-                    />
-                    Derek Smith
-                  </td>
-                  <td>$140,000</td>
-                  <td>140.00 ETH</td>
-                </tr>
-                <tr>
-                  <td>04</td>
-                  <td>
-                    <img
-                      src='https://images.unsplash.com/photo-1496302662116-35cc4f36df92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                      alt=''
-                    />
-                    Meg Klock
-                  </td>
-                  <td>$140,000</td>
-                  <td>140.00 ETH</td>
-                </tr>
+   
               </tbody>
             </table>
           </div>

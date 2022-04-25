@@ -4,7 +4,7 @@ import visualwave from "../global/assets/visualwave.png";
 
 const Visuals = () => {
   return (
-    <div className="visuals">
+    <div className="visuals" id="visual">
       <div className="content_area common_width">
         <h1>VISUALs</h1>
         <img src={visual} alt="" />

@@ -4,7 +4,7 @@ import team_2 from "../global/assets/team_2.png";
 import team_3 from "../global/assets/team_3.png";
 const Team = () => {
   return (
-    <div className="Team">
+    <div className="Team" id="team">
       <div className="content_area common_width">
         <h1>Creator/team</h1>
 

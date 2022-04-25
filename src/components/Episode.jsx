@@ -10,7 +10,7 @@ const Episode = ({
 }) => {
   return (
     <div className="VideoArea Episode" id={view_button && "active"}>
-      <div className="content_area common_width">
+      <div className="content_area common_width" id="episodes">
         {view_button && <h1>EPISODES</h1>}
 
         <img src={img} alt="" />

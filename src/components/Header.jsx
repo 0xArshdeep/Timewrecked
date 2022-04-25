@@ -11,28 +11,28 @@ const Header = () => {
             <a href="">Home</a>
           </li>
           <li>
-            <a href="">Mint</a>
+            <a href="#mint">Mint</a>
           </li>
           <li>
-            <a href="">Leaderboard</a>
+            <a href="#leaderboard">Leaderboard</a>
           </li>
           <li>
-            <a href="">About</a>
+            <a href="#about">About</a>
           </li>
           <li>
-            <a href="">Creators / Team</a>
+            <a href="#team">Creators / Team</a>
           </li>
           <li>
-            <a href="">Visual Overview</a>
+            <a href="#visual">Visual Overview</a>
           </li>
           <li>
-            <a href="">Characters</a>
+            <a href="#characters">Characters</a>
           </li>
           <li>
-            <a href="">Episodes</a>
+            <a href="#episodes">Episodes</a>
           </li>
           <li>
-            <a href="">Why Collectibles?</a>
+            <a href="#collectibles">Why Collectibles?</a>
           </li>
         </nav>
         <div className="burger_icon" onClick={(e) => setActive(!Active)}>

@@ -5,6 +5,11 @@ import small_circle_left from "../global/assets/cloud_sm_left.png";
 import cloud_sm_bottom from "../global/assets/cloud_sm_bottom.png";
 import cloud_right from "../global/assets/cloud_right.png";
 const MainBanner = () => {
+
+  const btnClickDiscord = () => {
+    window.open("https://discord.gg/timewrecked");
+  };
+
   
   return (
     <div className="MainBanner">
@@ -24,9 +29,13 @@ const MainBanner = () => {
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            window.open=('https://discord.gg/timewrecked',"_blank");
+            btnClickDiscord();
             }}>
               join our server</button>
+
+              <a href="#mint">
+            <button>mint</button>
+          </a>
         </div>
         <img src={main_banner_img} className="main_banner_img" alt="" />
       </div>

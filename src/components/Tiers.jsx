@@ -116,7 +116,7 @@ const Tiers = () => {
   }, [accounts, connectedChainId]);
 
   return (
-    <div className='tiers'>
+    <div className='tiers' id="mint">
       <div className='content_area common_width'>
         {/* {tiersData.map((EachData, index) => (
           <TierBox
