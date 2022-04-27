@@ -19,11 +19,17 @@ const MediaFeedback = () => {
           <img src={press_mention} alt="" />
         </div>
         <div className="img_wrapper">
-          <img src={internation_times} alt="" />
+          <a href="https://www.ibtimes.com/could-nfts-be-future-financing-3442316" target="_blank">
+            <img src={internation_times} alt="" />
+          </a>
         </div>
         <div className="grid_wrapper">
-          <img src={grid_logo_1} alt="" />
-          <img src={grid_logo_2} alt="" />
+          <a href="https://decrypt.co/90814/how-daos-nfts-and-defi-are-disrupting-hollywood" target="_blank">
+            <img src={grid_logo_1} alt="" />
+          </a>
+          <a href="https://www.investvoyager.com/blog/lights-crypto-action" target="_blank">
+            <img src={grid_logo_2} alt="" />
+          </a>
           <img src={grid_logo_3} alt="" />
         </div>
       </div>
