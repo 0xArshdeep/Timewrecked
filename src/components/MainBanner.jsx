@@ -7,7 +7,7 @@ import cloud_right from "../global/assets/cloud_right.png";
 const MainBanner = () => {
 
   const btnClickDiscord = () => {
-    window.open("https://discord.gg/timewrecked");
+    window.open("https://twitter.com/nexthollywood_");
   };
 
   
