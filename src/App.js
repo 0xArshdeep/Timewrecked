@@ -37,11 +37,7 @@ const client = createClient({
           qrcode: true,
           rpc: { [chain.id]: rpcUrl },
         },
-      }),
-      new InjectedConnector({
-        chains,
-        options: { name: 'Injected' },
-      }),
+      })
     ]
   },
 })

@@ -17,6 +17,15 @@ const NollywoordTeam = () => {
       <div className="content common_width">
         <h1>NEXthollywood team</h1>
         <div className="box">
+          <h1>ARSH BALLAGAN</h1>
+          <p>
+            Arsh is the technical lead for nexthollywood. He writes smart contracts, 
+            back-end engineering and DevOps for the team. He studied CS at SDSU after 
+            achieving a near-perfect SATs; he’s worked in full stack development, 
+            big data, and cloud.
+          </p>
+        </div>
+        <div className="box">
           <h1>DAVE "D.C." CASSIDY</h1>
           <p>
             DAVE "D.C." CASSIDY Writer/producer and founder of animation and

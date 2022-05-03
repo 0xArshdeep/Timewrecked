@@ -5,7 +5,6 @@ import {
   useAccount,
   useConnect,
   useDisconnect,
-  useEnsAvatar,
   useEnsName,
   useNetwork,
 } from "wagmi";
@@ -13,6 +12,7 @@ import {
 import { useContract, useSigner, useProvider } from "wagmi";
 
 import { useContractRead } from "wagmi";
+
 
 const Funded = () => {
   const { data: account } = useAccount();
@@ -80,19 +80,6 @@ const Funded = () => {
   return (
     <div className="Funded" id="connect">
       <div className="content_area  common_width">
-        {percentage ? <h1>{percentage?.toFixed(2)}% Funded</h1> : <h1></h1>}
-
-        <div className="progress_container">
-          <div className="progress_wrapper">
-            <span
-              className="inner_progress"
-              style={{
-                width: `${percentage}%`,
-              }}
-            ></span>
-          </div>
-          {account ? <p>{ethGenerated}/120</p> : <p></p>}
-        </div>
         {account ? (
           <div
             style={{

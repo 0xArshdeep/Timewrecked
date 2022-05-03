@@ -31,7 +31,7 @@ const MainBanner = () => {
             e.preventDefault();
             btnClickDiscord();
             }}>
-              join our server</button>
+              join our community</button>
 
               <a href="#connect">
             <button>mint</button>
