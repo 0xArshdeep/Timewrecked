@@ -1,54 +1,94 @@
-import React, { useEffect, useState } from 'react';
-import { ethers } from 'ethers';
-import TierBox from './TierBox';
-import { tiersData } from './constant';
-import { metaMask, hooks } from '../connectors/metaMask';
-import { abi, chainId, contractAddress, tierCosts } from '../config';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import TierBox from "./TierBox";
+import { tiersData } from "./constant";
+import { abi, chainId, contractAddress, tierCosts } from "../config";
+import { toast } from "react-toastify";
+
+import {
+  useAccount,
+  useConnect,
+  useDisconnect,
+  useEnsAvatar,
+  useEnsName,
+  useNetwork,
+} from "wagmi";
+
+import { useContract, useSigner, useProvider } from "wagmi";
+
+import { useContractRead } from "wagmi";
 
 const Tiers = () => {
   const [t1TotalSupply, setT1TotalSupply] = useState(0);
   const [t2TotalSupply, setT2TotalSupply] = useState(0);
   const [t3TotalSupply, setT3TotalSupply] = useState(0);
-  const {
-    useChainId,
-    useAccounts,
-    useIsActive,
-    useProvider,
-  } = hooks;
-  const accounts = useAccounts();
-  const isActive = useIsActive();
+
+  const { data: account } = useAccount();
+  const { data: ensAvatar } = useEnsAvatar({ addressOrName: account?.address });
+  const { data: ensName } = useEnsName({ address: account?.address });
+  const { connect, connectors, error, isConnecting, pendingConnector } =
+    useConnect();
+  const { disconnect } = useDisconnect();
+
+  const { activeChain, chains, isLoading, pendingChainId, switchNetwork } =
+    useNetwork();
+
+  const { data: signer, isError } = useSigner();
   const provider = useProvider();
-  const connectedChainId = useChainId();
-  
-  const isCorrectChain = connectedChainId === chainId;
 
-  useEffect(() => {
-    void metaMask.connectEagerly();
-  }, []);
-  // metaMask;
+  const contract = useContract({
+    addressOrName: contractAddress,
+    contractInterface: abi,
+    signerOrProvider: signer,
+  });
 
-  const getContract = () => {
-    const signer = provider?.getSigner();
-    const contract = new ethers.Contract(contractAddress, abi, signer);
-    return contract;
-  };
+  const { data: ts } = useContractRead(
+    {
+      addressOrName: contractAddress,
+      contractInterface: abi,
+    },
+    "totalSupply()"
+  );
+
+  const { data: ts1 } = useContractRead(
+    {
+      addressOrName: contractAddress,
+      contractInterface: abi,
+    },
+    "totalSupply(uint256)",
+    {
+      args: "1",
+    }
+  );
+
+  const { data: ts2 } = useContractRead(
+    {
+      addressOrName: contractAddress,
+      contractInterface: abi,
+    },
+    "totalSupply(uint256)",
+    {
+      args: 2,
+    }
+  );
+
+  const { data: ts3 } = useContractRead(
+    {
+      addressOrName: contractAddress,
+      contractInterface: abi,
+    },
+    "totalSupply(uint256)",
+    {
+      args: 3,
+    }
+  );
 
   const fetchTotalSupply = async () => {
+    console.log("fetching total supply");
     try {
-      const contract = getContract();
-      console.log(contract.totalSupply, contract);
-      const t1 = await contract['totalSupply(uint256)'](1);
-      const t2 = await contract['totalSupply(uint256)'](2);
-      const t3 = await contract['totalSupply(uint256)'](3);
-
-      console.log({ t1 });
-      const t1Number = t1.toNumber();
-      const t2Number = t2.toNumber();
-      const t3Number = t3.toNumber();
-      setT1TotalSupply(t1Number);
-      setT2TotalSupply(t2Number);
-      setT3TotalSupply(t3Number);
+      setT1TotalSupply(ts1.toNumber());
+      setT2TotalSupply(ts2.toNumber());
+      setT3TotalSupply(ts3.toNumber());
     } catch (error) {
       console.log({ error });
     }
@@ -57,7 +97,6 @@ const Tiers = () => {
   const mint = async (count, tier) => {
     const p = new Promise(async (resolve, reject) => {
       try {
-        const contract = getContract();
         const payableETHValue = count * tierCosts[tier - 1];
         console.log({ payableETHValue });
         const res = await contract.mint(count, tier, {
@@ -66,21 +105,21 @@ const Tiers = () => {
 
         await res.wait();
 
-        resolve('Successfully Minted');
+        resolve("Successfully Minted");
         pageLoad();
       } catch (error) {
         console.log({ error });
         switch (error?.code) {
-          case 'INSUFFICIENT_FUNDS':
-            reject('Not enough funds');
+          case "INSUFFICIENT_FUNDS":
+            reject("Not enough funds");
             break;
 
           case 4001:
-            reject('User denied the transaction');
+            reject("User denied the transaction");
             break;
 
           default:
-            reject('The process failed');
+            reject("The process failed");
             break;
         }
       }
@@ -102,18 +141,18 @@ const Tiers = () => {
   };
 
   const pageLoad = async () => {
-    if (isActive && isCorrectChain) {
+    if (account) {
       fetchTotalSupply();
     }
   };
 
   useEffect(() => {
     pageLoad();
-  }, [accounts, connectedChainId]);
+  }, [account, activeChain]);
 
   return (
-    <div className='tiers' id="mint">
-      <div className='content_area common_width'>
+    <div className="tiers" id="mint">
+      <div className="content_area common_width">
         {/* {tiersData.map((EachData, index) => (
           <TierBox
             key={index}
@@ -142,7 +181,7 @@ const Tiers = () => {
           mint={(c) => {
             mint(c, 1);
           }}
-          isDisabled={!isActive}
+          isDisabled={!account}
         />
 
         <TierBox
@@ -159,7 +198,7 @@ const Tiers = () => {
           mint={(c) => {
             mint(c, 2);
           }}
-          isDisabled={!isActive}
+          isDisabled={!account}
         />
         <TierBox
           etheading={tiersData[2].etheading}
@@ -175,7 +214,7 @@ const Tiers = () => {
           mint={(c) => {
             mint(c, 3);
           }}
-          isDisabled={!isActive}
+          isDisabled={!account}
         />
       </div>
     </div>

@@ -1063,6 +1063,8 @@
   line-height: 19px;
   letter-spacing: 0em;
   text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .Funded .progress_wrapper {

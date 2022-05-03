@@ -1,173 +1,153 @@
-import { ethers } from 'ethers';
-import React, { useEffect, useState } from 'react';
-import { abi, chainId, contractAddress } from '../config';
-import { metaMask, hooks } from '../connectors/metaMask';
+import { ethers } from "ethers";
+import React, { useEffect, useState } from "react";
+import { abi, chainId, contractAddress } from "../config";
+import {
+  useAccount,
+  useConnect,
+  useDisconnect,
+  useEnsAvatar,
+  useEnsName,
+  useNetwork,
+} from "wagmi";
+
+import { useContract, useSigner, useProvider } from "wagmi";
+
+import { useContractRead } from "wagmi";
 
 const Funded = () => {
-  const [userBalance, setUserBalance] = useState(0);
-  const [totalSupply, setTotalSupply] = useState(0);
-  const [t1TotalSupply, setT1TotalSupply] = useState(0);
-  const [t2TotalSupply, setT2TotalSupply] = useState(0);
-  const [t3TotalSupply, setT3TotalSupply] = useState(0);
-  const [maxSupply, setMaxSupply] = useState(0);
-  const {
-    useChainId,
-    useAccounts,
-    useError,
-    useIsActivating,
-    useIsActive,
-    useProvider,
-    useENSNames,
-  } = hooks;
-  const accounts = useAccounts();
-  const isActive = useIsActive();
+  const { data: account } = useAccount();
+  const { data: ensName } = useEnsName({ address: account?.address });
+  const { connect, connectors, error, isConnecting, pendingConnector } =
+    useConnect();
+  const { disconnect } = useDisconnect();
+
+  const { activeChain, chains, isLoading, pendingChainId, switchNetwork } =
+    useNetwork();
+
+  const { data: signer, isError } = useSigner();
   const provider = useProvider();
-  const connectedChainId = useChainId();
 
-  const isCorrectChain = connectedChainId === chainId;
-  const account = accounts && accounts[0];
+  const contract = useContract({
+    addressOrName: contractAddress,
+    contractInterface: abi,
+    signerOrProvider: signer,
+  });
 
-  const fetchBalance = async () => {
-    if (isActive) {
-      const balance = await provider.getBalance(account);
-      const beth = ethers.utils.formatEther(balance);
-      setUserBalance(beth);
+  const { data: ts } = useContractRead(
+    {
+      addressOrName: contractAddress,
+      contractInterface: abi,
+    },
+    "totalSupply()"
+  );
+
+  const { data: ts1 } = useContractRead(
+    {
+      addressOrName: contractAddress,
+      contractInterface: abi,
+    },
+    "totalSupply(uint256)",
+    {
+      args: "1",
     }
-  };
+  );
 
-  const getContract = () => {
-    const signer = provider?.getSigner();
-    const contract = new ethers.Contract(contractAddress, abi, signer);
-    return contract;
-  };
-
-  const fetchSupply = async () => {
-    try {
-      const contract = getContract();
-
-      const ts = await contract['totalSupply()']();
-      const t1 = await contract["totalSupply(uint256)"](1);
-      const t2 = await contract["totalSupply(uint256)"](2);
-      const t3 = await contract["totalSupply(uint256)"](3);
-      const ms = await contract.maxSupply();
-
-      const tsNumber = ts.toNumber();
-      const msNumber = ms.toNumber();
-      const t1Number = t1.toNumber();
-      const t2Number = t2.toNumber();
-      const t3Number = t3.toNumber();
-      setT1TotalSupply(t1Number);
-      setT2TotalSupply(t2Number);
-      setT3TotalSupply(t3Number);
-
-      setTotalSupply(tsNumber);
-      setMaxSupply(msNumber);
-    } catch (error) {
-      console.log({ error });
+  const { data: ts2 } = useContractRead(
+    {
+      addressOrName: contractAddress,
+      contractInterface: abi,
+    },
+    "totalSupply(uint256)",
+    {
+      args: 2,
     }
-  };
+  );
 
-  const pageLoad = async () => {
-    if (isActive && isCorrectChain) {
-      fetchBalance();
-      fetchSupply();
+  const { data: ts3 } = useContractRead(
+    {
+      addressOrName: contractAddress,
+      contractInterface: abi,
+    },
+    "totalSupply(uint256)",
+    {
+      args: 3,
     }
-  };
+  );
 
-  useEffect(() => {
-    pageLoad();
-  }, [accounts, connectedChainId]);
-
-  useEffect(() => {
-    void metaMask.connectEagerly();
-  }, []);
-
-  useEffect(() => {
-    if (!isActive) {
-      metaMask.activate(chainId);
-    }
-  }, []);
-
-  const ethGenerated = (t1TotalSupply * 10) + (t2TotalSupply * 1.5) + (t3TotalSupply * 0.1);
-  const percentage = (((t1TotalSupply * 10) + (t2TotalSupply * 1.5) + (t3TotalSupply * 0.1)) / 120) * 100;
+  const ethGenerated = ts1 * 10 + ts2 * 1.5 + ts3 * 0.1;
+  const percentage = ((ts1 * 10 + ts2 * 1.5 + ts3 * 0.1) / 120) * 100;
 
   return (
-    <div className='Funded' id="connect">
-      <div className='content_area  common_width'>
+    <div className="Funded" id="connect">
+      <div className="content_area  common_width">
         {percentage ? <h1>{percentage?.toFixed(2)}% Funded</h1> : <h1></h1>}
 
-        <div className='progress_container'>
-          <div className='progress_wrapper'>
+        <div className="progress_container">
+          <div className="progress_wrapper">
             <span
-              className='inner_progress'
+              className="inner_progress"
               style={{
                 width: `${percentage}%`,
               }}
             ></span>
           </div>
-          {isActive ? (
-              <p>
-              {ethGenerated}/120
-            </p> 
-              
-            ) : (
-              <p></p>       
-            )}
-          
+          {account ? <p>{ethGenerated}/120</p> : <p></p>}
         </div>
-        {isActive ? (
-          <>
-            {!isCorrectChain ? (
-              <div
-                className='buttons_wrapper'
-                onClick={() => metaMask.activate(chainId)}
+        {account ? (
+          <div
+            style={{
+              textAlign: "center",
+              color: "white",
+              marginTop: 20,
+              fontSize: 20,
+            }}
+          >
+            <div>
+              {ensName ? `${ensName} (${account.address})` : account.address}
+            </div>
+            <div>Connected to {account.connector?.name}</div>
+            <div className="buttons_wrapper">
+              <button
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={disconnect}
               >
-                <button
-                  style={{
-                    cursor: 'pointer',
-                  }}
-                >
-                  Change Chain
-                </button>
-              </div>
-            ) : (
+                Disconnect
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="buttons_wrapper">
+            {connectors.map((connector) => (
+              <button
+                disabled={!connector.ready}
+                key={connector.id}
+                onClick={() => connect(connector)}
+                style={{
+                  cursor: "pointer",
+                }}
+              >
+                {connector.name}
+                {!connector.ready && " (unsupported)"}
+                {isConnecting &&
+                  connector.id === pendingConnector?.id &&
+                  " (connecting)"}
+              </button>
+            ))}
+
+            {error && (
               <div
                 style={{
-                  textAlign: 'center',
-                  color: 'white',
+                  textAlign: "center",
+                  color: "white",
                   marginTop: 20,
                   fontSize: 20,
                 }}
               >
-                <p>
-                  <span> Connected To</span>{' '}
-                  <span>
-                    <span
-                      style={{
-                        fontWeight: 700,
-                      }}
-                    >
-                      {account.slice(0, 6)}...
-                      {account.slice(account.length - 4, account.length)}
-                    </span>{' '}
-                    <span> ({userBalance && userBalance.slice(0, 4)})</span>
-                  </span>
-                </p>
+                {error.message}
               </div>
             )}
-          </>
-        ) : (
-          <div
-            className='buttons_wrapper'
-            onClick={() => metaMask.activate(chainId)}
-          >
-            <button
-              style={{
-                cursor: 'pointer',
-              }}
-            >
-              Connect Wallet
-            </button>
           </div>
         )}
       </div>
