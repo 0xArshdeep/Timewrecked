@@ -31,9 +31,6 @@ const Header = () => {
           <li>
             <a href="https://twitter.com/timewreckednft" target="_blank">Twitter</a>
           </li>
-          <li>
-            <a href="https://opensea.io/collection/timewrecked" target="_blank">Opensea</a>
-          </li>
         </nav>
         <div className="burger_icon" onClick={(e) => setActive(!Active)}>
           <img src={burger} alt="" />

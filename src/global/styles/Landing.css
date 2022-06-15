@@ -1066,6 +1066,31 @@
   margin-left: 10px;
   margin-right: 10px;
 }
+.Funded .content_area .buttons_wrapper_moonpay {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.Funded .content_area .buttons_wrapper_moonpay button {
+  height: 54px;
+  width: 152px;
+  left: 645px;
+  top: 4273.93310546875px;
+  border-radius: 19px;
+  padding: 10px;
+  background-color: #7d00ff;
+  color: #fff;
+  border: 2px solid #7d00ff;
+  box-shadow: 0px 0px 57px 0px #00000036;
+  font-family: Chelsea Market;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
 .Funded .progress_wrapper {
   height: 13.776357650756836px;

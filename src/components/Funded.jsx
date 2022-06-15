@@ -13,7 +13,6 @@ import { useContract, useSigner, useProvider } from "wagmi";
 
 import { useContractRead } from "wagmi";
 
-
 const Funded = () => {
   const { data: account } = useAccount();
   const { data: ensName } = useEnsName({ address: account?.address });
@@ -116,7 +115,7 @@ const Funded = () => {
                 }}
               >
                 {connector.name}
-                {!connector.ready && " (unsupported)"}
+                {!connector.ready && ""}
                 {isConnecting &&
                   connector.id === pendingConnector?.id &&
                   " (connecting)"}
@@ -137,6 +136,18 @@ const Funded = () => {
             )}
           </div>
         )}
+
+        <div className="buttons_wrapper_moonpay">
+          <a href="https://buy.moonpay.com/?apiKey=pk_live_FzxpmBB41g85jr7ZlKm6jc2ep9gy1Zfk&currencyCode=eth" target="blank">
+            <button
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              Buy ETH with MoonPay
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   );
